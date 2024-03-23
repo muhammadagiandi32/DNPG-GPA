@@ -9,29 +9,20 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
-
+    <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bs-stepper/css/bs-stepper.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/dropzone/min/dropzone.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css?v=3.2.0') }}">
 
-    {{-- ViwersJS CDN --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css"
-        integrity="sha512-eG8C/4QWvW9MQKJNw2Xzr0KW7IcfBSxljko82RuSs613uOAg/jHEeuez4dfFgto1u6SRI/nXmTr9YPCjs1ozBg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- css --}}
-    <style>
-        .img-zoom {
-            transition: transform 0.3s ease-out;
-        }
-
-        .img-zoom:hover {
-            transform: scale(1.5);
-            /* Sesuaikan dengan faktor zoom yang diinginkan */
-        }
-    </style>
+    <!-- sweetalert -->
+    <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -79,8 +70,9 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
                             <div class="media">
-                                <img src="./assets/dist/img/user1-128x128.jpg" alt="User Avatar"
+                                <img src="{{ asset('assets/dist/img/user1-128x128.jpg') }}" alt="User Avatar"
                                     class="img-size-50 mr-3 img-circle">
+
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title"> Brad Diesel <span
                                             class="float-right text-sm text-danger">
@@ -97,8 +89,9 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <div class="media">
-                                <img src="./assets/dist/img/user8-128x128.jpg" alt="User Avatar"
+                                <img src="{{ asset('assets/dist/img/user8-128x128.jpg') }}" alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
+
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title"> John Pierce <span
                                             class="float-right text-sm text-muted">
@@ -115,8 +108,9 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <div class="media">
-                                <img src="./assets/dist/img/user3-128x128.jpg" alt="User Avatar"
+                                <img src="{{ asset('assets/dist/img/user3-128x128.jpg') }}" alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
+
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title"> Nora Silvester <span
                                             class="float-right text-sm text-warning">
@@ -175,15 +169,17 @@
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="../../index3.html" class="brand-link">
-                <img src="./assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
+
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2"
+                        <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
                             alt="User Image">
+
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Alexander Pierce</a>
@@ -258,49 +254,107 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
-                                </div>
-
+                            <div class="card card-default">
+                                <!-- <div class="card-header">
+                    <h3 class="card-title">Dropzone.js <small>
+                        <em>jQuery File Upload</em> like look </small>
+                    </h3>
+                  </div> -->
                                 <div class="card-body">
-                                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table id="data-table"
-                                                    class="table table-bordered table-striped dataTable dtr-inline"
-                                                    aria-describedby="example1_info">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No.</th>
-                                                            <th>UUID</th>
-                                                            <th>URL</th>
-                                                            <th>Keterangan</th>
-                                                            <th>Image Name</th>
-                                                            <th>Image Url</th>
-                                                            <th>Created At</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>No.</th>
-                                                            <th>UUID</th>
-                                                            <th>URL</th>
-                                                            <th>Keterangan</th>
-                                                            <th>Image Name</th>
-                                                            <th>Image Url</th>
-                                                            <th>Created At</th>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
+                                    <div id="actions" class="row">
+                                        <div class="col-lg-6">
+                                            <div class="btn-group w-100">
+                                                <span class="btn btn-success col fileinput-button">
+                                                    <i class="fas fa-plus"></i>
+                                                    <span>Add files</span>
+                                                </span>
+                                                <button type="submit" class="btn btn-primary col start">
+                                                    <i class="fas fa-upload"></i>
+                                                    <span>Start upload</span>
+                                                </button>
+                                                <button type="reset" class="btn btn-danger col deleteAll">
+                                                    <i class="fas fa-times-circle"></i>
+                                                    <span>Delete All</span>
+                                                </button>
                                             </div>
                                         </div>
-
+                                        <div class="col-lg-6 d-flex align-items-center">
+                                            <div class="fileupload-process w-100">
+                                                <div id="total-progress" class="progress progress-striped active"
+                                                    role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                    aria-valuenow="0">
+                                                    <div class="progress-bar progress-bar-success" style="width:0%;"
+                                                        data-dz-uploadprogress></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="dnpgno">NO DNPG</label>
+                                                <input type="text" class="form-control dnpgno" id="dnpgno"
+                                                    placeholder="NO DNPG" data-dz-dnpgno>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table table-striped files" id="previews">
+                                        <div id="template">
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <div class="col-auto">
+                                                        <span class="preview">
+                                                            <img src="data:," alt data-dz-thumbnail />
+                                                        </span>
+                                                    </div>
+                                                    <div class="col d-flex align-items-center">
+                                                        <p class="mb-0">
+                                                            <span class="lead" data-dz-name></span> ( <span
+                                                                data-dz-size></span>)
+                                                        </p>
+                                                        <strong class="error text-danger"
+                                                            data-dz-errormessage></strong>
+                                                    </div>
+                                                    <div class="col-4 d-flex align-items-center">
+                                                        <div class="progress progress-striped active w-100"
+                                                            role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                                            aria-valuenow="0">
+                                                            <div class="progress-bar progress-bar-success"
+                                                                style="width:0%;" data-dz-uploadprogress></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto d-flex align-items-center">
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary start">
+                                                                <i class="fas fa-upload"></i>
+                                                                <span>Start</span>
+                                                            </button>
+                                                            <button data-dz-remove class="btn btn-warning cancel">
+                                                                <i class="fas fa-times-circle"></i>
+                                                                <span>Cancel</span>
+                                                            </button>
+                                                            <button data-dz-remove class="btn btn-danger delete">
+                                                                <i class="fas fa-trash"></i>
+                                                                <span>Delete</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="keterangan">Keterangan</label>
+                                                        <input type="text" class="form-control keterangan"
+                                                            id="keterangan" placeholder="keterangan"
+                                                            data-dz-keterangan>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- <div class="card-footer"> Visit <a href="https://www.dropzonejs.com">dropzone.js documentation</a> for more examples and information about the plugin. </div> -->
                             </div>
                         </div>
                     </div>
@@ -318,136 +372,141 @@
     </div>
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    assets/
-    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
+    <!-- <script src="./assets/dist/js/demo.js"></script> -->
 
-    {{-- external script CDN --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"
-        integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {{-- ViwersJS --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"
-        integrity="sha512-EC3CQ+2OkM+ZKsM1dbFAB6OGEPKRxi6EDRnZW9ys8LghQRAq6cXPUgXCCujmDrXdodGXX9bqaaCRtwj4h4wgSQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function() {
-            // Fungsi untuk zoom in dan zoom out gambar
-            $('.zoomable-image').on('click', function() {
-                $(this).toggleClass('zoomed-in');
+        // token
+        // const token = await authenticateUser(username, password);
+
+        // if (token) {
+        //     document.getElementById('tokenInput').value = token;
+        //     this.submit();
+        // }
+        // async function authenticateUser(username, password) {
+        //   const response = await fetch('UploadClass.php', {
+        //       method: 'POST',
+        //       headers: {
+        //           'Content-Type': 'application/x-www-form-urlencoded',
+        //       },
+        //       // body: `username=${username}&password=${password}`,
+        //   });
+
+        //   if (response.ok) {
+        //       const data = await response.json();
+        //       return data.token;
+        //   } else {
+        //       console.error('Authentication failed');
+        //       return null;
+        //   }
+        // }
+        // DropzoneJS Demo Code Start
+        Dropzone.autoDiscover = false
+        document.querySelector("#actions .deleteAll").style.display = 'none';
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
+        // Tambahkan event listener untuk mendengarkan perubahan pada input keterangan
+
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+            url: "{{ route('dnpg.store') }}", // Set the url
+            headers: {
+                'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+            },
+            thumbnailWidth: 80,
+            thumbnailHeight: 80,
+            parallelUploads: 20,
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button", // Define the element that should be used as click trigger to select files.
+        })
+        myDropzone.on("addedfile", function(file) {
+            document.querySelector("#actions .deleteAll").style.display = 'block';
+
+            // Hookup the start button
+            const keterangan = file.previewElement.querySelector(".keterangan").value;
+
+            file.previewElement.querySelector(".start").onclick = function() {
+                myDropzone.enqueueFile(file)
+            }
+        })
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function(progress) {
+            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        })
+        myDropzone.on("sending", function(file, xhr, formData) {
+            const keterangan = file.previewElement.querySelector(".keterangan").value;
+            const dnpgno = document.getElementsByClassName("dnpgno")[0].value;
+
+
+            // Tambahkan keterangan ke form data yang akan dikirim
+            formData.append("keterangan", keterangan);
+            formData.append("dnpgno", dnpgno);
+
+            // Show the total progress bar when upload starts
+            document.querySelector("#total-progress").style.opacity = "1"
+            // And disable the start button
+            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+
+        })
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function(progress) {
+            document.querySelector("#total-progress").style.opacity = "0"
+        })
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function() {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+
+            document.querySelectorAll('.cancel, .delete').forEach(function(element) {
+                element.style.display = 'none';
             });
-        });
-        $(function() {
-
-            var table = $('#data-table').DataTable({
-                scrollY: 500, // Sesuaikan dengan tinggi maksimum yang diinginkan
-                scrollX: true,
-                scrollCollapse: true,
-                paging: true,
-                fixedHeader: true,
-                responsive: true,
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('dnpg.index') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'uuid',
-                        name: 'uuid'
-                    },
-                    {
-                        data: 'url',
-                        name: 'url',
-                        render: function(data, type, row) {
-                            // Jika tipe render adalah display, tampilkan tautan
-                            if (type === 'display') {
-                                return '<a href="' + data + '" target="_blank">Klik di sini</a>';
-                            }
-                            // Jika tipe render bukan display, kembalikan data aslinya
-                            return data;
-                        }
-                    },
-                    {
-                        data: 'keterangan',
-                        name: 'keterangan'
-                    },
-                    {
-                        data: 'image_name',
-                        name: 'image_name'
-                    },
-                    {
-                        data: 'url',
-                        name: 'url',
-                        render: function(data, type, row) {
-                            // Jika tipe render adalah display, tampilkan gambar
-                            if (type === 'display') {
-                                return '<img src="' + data +
-                                    '" alt="' + row.image_name +
-                                    '" class="img-thumbnail img-zoom">';
-                            }
-                            // Jika tipe render bukan display, kembalikan data aslinya
-                            return data;
-                        },
-                        className: "image"
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at',
-                        render: function(data, type, row) {
-                            // Jika tipe render adalah display, tampilkan tanggal dan waktu
-                            if (type === 'display') {
-                                // Ubah format tanggal sesuai kebutuhan Anda, contoh menggunakan moment.js
-                                return moment(data).format('YYYY-MM-DD HH:mm:ss');
-                            }
-                            // Jika tipe render bukan display, kembalikan data aslinya
-                            return data;
-                        },
-                    }
-                    // {
-                    //     data: 'action',
-                    //     name: 'action',
-                    //     orderable: false,
-                    //     searchable: false
-                    // },
-                ]
+        }
+        myDropzone.on("success", function(file, response) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                    myDropzone.removeAllFiles(file);
+                    document.querySelector("#actions .deleteAll").style.display = 'none';
+                }
             });
-            table.on("click", "td.image", function(e) {
-                e.preventDefault()
+            Toast.fire({
+                icon: "success",
+                title: response.message
+            });
 
-                let table = $(this).closest("table").DataTable()
-                let row = $(this).closest("tr")
-                let data = table.row(row).data()
-
-                let image = new Image()
-                image.src = data.url
-                image.alt = data.image_name
-
-                let viewer = new Viewer(image, {
-                    zoomRatio: 2,
-                    maxZoomRatio: 2,
-                    hidden: function() {
-                        viewer.destroy();
-                    }
-                }).show()
-            })
+            console.log(response); // Respons dari server
         });
+        // document.querySelector("#actions .cancel").onclick = function() {
+        //   myDropzone.removeAllFiles(true)
+        // }
+        document.querySelector("#actions .deleteAll").onclick = function() {
+            myDropzone.removeAllFiles(true);
+        }
+
+        // DropzoneJS Demo Code End
     </script>
 </body>
 

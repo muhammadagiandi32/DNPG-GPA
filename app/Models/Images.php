@@ -5,20 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DnpgFile extends Model
+class Images extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $fillable = [
-        'id','user_id', 'dnpg_no', 'created_at',
+        'id','image_id','keterangan','image_name','url', 'created_at',
     ];
-    public function images()
+    public function dnpgFile()
     {
-        return $this->hasMany(Images::class, 'image_id', 'id');
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(DnpgFile::class, 'image_id','id');
     }
 }

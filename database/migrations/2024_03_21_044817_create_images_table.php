@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDnpgFilesTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateDnpgFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dnpg_files', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id');
-            $table->string('dnpg_no');
-            $table->string('group_name')->nullable();
+            $table->uuid('image_id');
+            $table->string('keterangan');
+            $table->string('image_name');
+            $table->string('url');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('image_id')->references('id')->on('dnpg_files')->onDelete('cascade');
         });
     }
 
@@ -30,6 +32,6 @@ class CreateDnpgFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dnpg_files');
+        Schema::dropIfExists('images');
     }
 }

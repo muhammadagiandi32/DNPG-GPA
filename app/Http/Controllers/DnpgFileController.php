@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\DnpgFile;
+use App\Models\Images;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
@@ -18,10 +20,14 @@ class DnpgFileController extends Controller
     public function index(Request $request)
     {
         //
+        // dd( DnpgFile::with('images')->get());
         if ($request->ajax()) {
-            return  DataTables::of(DnpgFile::query())->toJson();
+            $query = DnpgFile::with(['images' => function ($query) {
+                $query->select('id', 'image_id', 'keterangan', 'image_name', 'url');
+            }])->with('user');
+            return DataTables::of($query)->toJson();
         }
-            return view('dnpg.create');
+        return view('dnpg.index');
     }
     /**
      * Show the form for creating a new resource.
@@ -31,6 +37,7 @@ class DnpgFileController extends Controller
     public function create()
     {
         //
+        return view('dnpg.create');
     }
 
     /**
@@ -42,19 +49,16 @@ class DnpgFileController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request);
-        
+        // dd($request->dnpgno);
+
         $request->validate([
             'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'dnpgno' => 'required'
         ]);
 
         try {
-        // Memulai transaksi database
+            // Memulai transaksi database
             DB::beginTransaction();
-
-            $request->validate([
-                'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
 
             // Jika validasi berhasil, lanjutkan dengan logika Anda
             if ($request->file('file')->isValid()) {
@@ -83,10 +87,9 @@ class DnpgFileController extends Controller
                 // }
                 // Simpan data ke database dalam transaksi
                 $insertDB_dnpg = DnpgFile::create([
-                    'uuid' => $uuid,
-                    'keterangan' => $request->keterangan,
-                    'image_name' => $originalFileName,
-                    'url' => $path,
+                    'id' => $uuid,
+                    'user_id' => Auth::id(),
+                    'dnpg_no' => $request->dnpgno,
                     'created_at' => now(),
                 ]);
 
