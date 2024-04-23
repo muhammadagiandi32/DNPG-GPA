@@ -28,19 +28,41 @@ class DatabaseSeeder extends Seeder
         Roles::create(['uuid' => $faker->uuid, 'name' => 'user', 'is_active' => true]);
 
         // Permissions
-        Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Create', 'route' => 'dnpgs.create']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Index', 'route' => 'dnpg.index']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Create', 'route' => 'dnpg.create']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Store', 'route' => 'dnpg.store']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Edit', 'route' => 'dnpg.edit']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Update', 'route' => 'dnpg.update']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Delete', 'route' => 'dnpg.destroy']);
-        Permissions::create(['uuid' => $faker->uuid, 'name' => 'DNPG Index', 'route' => 'dnpg.index']);
         //  Users
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'Users Index', 'route' => 'users.index']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'Users Create', 'route' => 'users.create']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'Users Store', 'route' => 'users.store']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'Users Edit', 'route' => 'users.edit']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'Users Update', 'route' => 'users.update']);
         Permissions::create(['uuid' => $faker->uuid, 'name' => 'Users Delete', 'route' => 'users.destroy']);
-        Permissions::create(['uuid' => $faker->uuid, 'name' => 'Users Index', 'route' => 'users.index']);
+        // CBM
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'CBM Index', 'route' => 'cbm.index']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'CBM Create', 'route' => 'cbm.create']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'CBM Store', 'route' => 'cbm.store']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'CBM Edit', 'route' => 'cbm.edit']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'CBM Update', 'route' => 'cbm.update']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'CBM Delete', 'route' => 'cbm.destroy']);
+
+        // OPNAME
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'OPNAME Index', 'route' => 'opname.index']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'OPNAME Create', 'route' => 'opname.create']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'OPNAME Store', 'route' => 'opname.store']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'OPNAME Edit', 'route' => 'opname.edit']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'OPNAME Update', 'route' => 'opname.update']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'OPNAME Delete', 'route' => 'opname.destroy']);
+        // SJ
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'SJ Index', 'route' => 'sj.index']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'SJ Create', 'route' => 'sj.create']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'SJ Store', 'route' => 'sj.store']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'SJ Edit', 'route' => 'sj.edit']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'SJ Update', 'route' => 'sj.update']);
+        Permissions::create(['uuid' => $faker->uuid, 'name' => 'SJ Delete', 'route' => 'sj.destroy']);
 
         // insert many to many Database
         // Dapatkan permission yang sesuai (misalnya, 'DNPG' dan 'Users')

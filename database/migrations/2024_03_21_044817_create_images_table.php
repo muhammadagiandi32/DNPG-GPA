@@ -14,7 +14,8 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->bigInteger('no')->unsigned()->nullable();
+            $table->uuid('id')->primary(); // Menjadikan kolom 'id' sebagai primary key
             $table->uuid('image_id');
             $table->string('keterangan');
             $table->string('image_name');

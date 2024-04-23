@@ -14,12 +14,12 @@ class CreateDnpgFilesTable extends Migration
     public function up()
     {
         Schema::create('dnpg_files', function (Blueprint $table) {
+            $table->bigInteger('no')->unsigned()->nullable();
             $table->uuid('id')->primary();
             $table->foreignId('user_id');
             $table->string('dnpg_no');
             $table->string('group_name')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

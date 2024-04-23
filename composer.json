@@ -11,6 +11,7 @@
         "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "prodigyphp/laravel-ssh-tunnel": "^3.4",
         "yajra/laravel-datatables-oracle": "^9.21"
     },
     "require-dev": {

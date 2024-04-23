@@ -19,8 +19,6 @@ class DnpgFileController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // dd( DnpgFile::with('images')->get());
         if ($request->ajax()) {
             $query = DnpgFile::with(['images' => function ($query) {
                 $query->select('id', 'image_id', 'keterangan', 'image_name', 'url');
@@ -48,69 +46,68 @@ class DnpgFileController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd($request->dnpgno);
-
         $request->validate([
-            'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'dnpgno' => 'required'
+            'files.*' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048', // Menerima multiple files
+            'dnpgno' => 'required',
+            // 'keterangan.*' => 'required', // Validasi keterangan untuk setiap file
         ]);
 
         try {
             // Memulai transaksi database
             DB::beginTransaction();
 
-            // Jika validasi berhasil, lanjutkan dengan logika Anda
-            if ($request->file('file')->isValid()) {
+            $uuid = Str::uuid();
+            // Simpan data ke database dalam transaksi
+            $insertDB_dnpg = DnpgFile::create([
+                'id' => Str::uuid(),
+                'user_id' => Auth::id(),
+                'dnpg_no' => $request->dnpgno,
+                'created_at' => now(),
+            ]);
+            $dnpgFileId = $insertDB_dnpg->id;
+
+            // Loop melalui setiap file yang dikirimkan
+            foreach ($request->file('files') as $index => $file) {
                 // Proses file yang diunggah
-                $destinationPath = 'uploads';
-                $uuid = Str::uuid();
-                $originalFileName = $request->file('file')->getClientOriginalName();
-                $fileName = $uuid . '.' . $request->file('file')->getClientOriginalExtension();
+                if ($file->isValid()) {
+                    $destinationPath = 'uploads';
+                    $uuid = Str::uuid();
+                    $fileName = $uuid . '.' . $file->getClientOriginalExtension();
+                    $path = $file->move($destinationPath, $fileName);
 
-                // Move the uploaded file to the specified path
-                $path = $request->file('file')->move($destinationPath, $fileName);
+                    // Membuat URL gambar
+                    $imageUrl = url($destinationPath . '/' . $fileName);
 
-                // untuk menjalankan sftp synology
-                // $sftp = new SFTP('synology-nas-ip');
-                // if (!$sftp->login('ftp-username', 'ftp-password')) {
-                //     die('Login Failed');
-                // }
-
-                // $localFile = '/path/to/local/file.txt';
-                // $remoteFile = '/path/on/synology/file.txt';
-
-                // if ($sftp->put($remoteFile, $localFile, SFTP::SOURCE_LOCAL_FILE)) {
-                //     echo 'File uploaded successfully.';
-                // } else {
-                //     echo 'Error uploading file.';
-                // }
-                // Simpan data ke database dalam transaksi
-                $insertDB_dnpg = DnpgFile::create([
-                    'id' => $uuid,
-                    'user_id' => Auth::id(),
-                    'dnpg_no' => $request->dnpgno,
-                    'created_at' => now(),
-                ]);
-
-                // Commit transaksi jika semua operasi berhasil
-                DB::commit();
-
-                // Respon atau redirect sesuai kebutuhan
-                return response()->json(['message' => 'File uploaded successfully', 'path' => $path], 201);
-            } else {
-                // Jika file tidak valid, tangani sesuai kebutuhan
-                return response()->json(['error' => 'File tidak valid'], 422);
+                    $insertDB_Image = Images::create([
+                        'id' => $uuid,
+                        'image_id' => $dnpgFileId,
+                        'keterangan' => $request->keterangan[$index], // Ambil keterangan sesuai dengan index
+                        'image_name' => $fileName,
+                        'url' => $imageUrl,
+                        'created_at' => now()
+                    ]);
+                } else {
+                    // Jika file tidak valid, tangani sesuai kebutuhan
+                    DB::rollback();
+                    return response()->json(['error' => 422, 'message' => 'File tidak valid'], 422);
+                }
             }
+
+            // Commit transaksi jika semua operasi berhasil
+            DB::commit();
+
+            // Respon ke frontend
+            return response()->json(['message' => 'Files uploaded successfully'], 201);
         } catch (\Exception $e) {
             // Tangani kesalahan jika terjadi
             // Rollback transaksi untuk mengembalikan database ke keadaan semula
             DB::rollback();
 
             // Respon atau tanggapi kesalahan sesuai kebutuhan
-            return response()->json(['error' => 'Terjadi kesalahan saat mengunggah file'], 500);
+            return response()->json(['error' => 500, 'message' => $e], 500);
         }
     }
+
 
     /**
      * Display the specified resource.
