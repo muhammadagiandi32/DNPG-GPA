@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-    // dd(User::with('roles')->get());
-});
+// Route::get('/', function () {
+//     return view('welcome');
+//     // dd(User::with('roles')->get());
+// });
 
-// Route::get('/test', function () {
-//     return view('dnpg.index');
-// })->middleware('auth');
+Route::middleware('guest')->get('/', function () {
+    return redirect()->route('login');
+});
 
 Auth::routes();
 

@@ -61,6 +61,19 @@
                                 </a>
                             </li>
                         @endif
+                        @if (Auth::check())
+                            <li class="nav-item">
+                                <a href="#"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Logout</p>
+                                </a>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endif
                     </ul>
                 </li>
 
