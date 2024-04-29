@@ -38,9 +38,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th>No.</th>
-                                                        <th>UUID</th>
-                                                        <th>URL</th>
+                                                        <th>DNPG NO</th>
                                                         <th>Keterangan</th>
+                                                        <th>Images</th>
                                                         <th>Image Name</th>
                                                     </tr>
                                                 </thead>
@@ -50,9 +50,9 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>No.</th>
-                                                        <th>UUID</th>
-                                                        <th>URL</th>
+                                                        <th>DNPG NO</th>
                                                         <th>Keterangan</th>
+                                                        <th>Images</th>
                                                         <th>Image Name</th>
                                                     </tr>
                                                 </tfoot>
@@ -112,16 +112,16 @@
                         name: 'dnpg_no'
                     },
                     {
-                        data: 'dnpg_no',
-                        name: 'dnpg_no',
-                        // render: function(data, type, row) {
-                        //     // Jika tipe render adalah display, tampilkan tautan
-                        //     if (type === 'display') {
-                        //         return '<a href="' + data + '" target="_blank">Klik di sini</a>';
-                        //     }
-                        //     // Jika tipe render bukan display, kembalikan data aslinya
-                        //     return data;
-                        // }
+                        data: 'images',
+                        name: 'keterangan',
+                        render: function(data, type, row) {
+                            var keterangans = '';
+                            data.forEach(function(keterangan) {
+                                keterangans += '<li>' + keterangan.keterangan + '</li>';
+                            });
+                            // Jika tipe render bukan display, kembalikan data aslinya
+                            return keterangans;
+                        }
                     },
                     {
                         data: 'images', // Kolom yang menyimpan informasi gambar
@@ -192,6 +192,9 @@
                     var figcaption = document.createElement('figcaption');
                     figcaption.textContent = captions[
                         index]; // Tambahkan caption ke dalam figcaption
+                    figcaption.style.fontSize = 'larger'; // Ubah ukuran font menjadi lebih besar
+                    figcaption.style.fontWeight = 'bold'; // Membuat tebal caption
+
                     figure.appendChild(image);
                     figure.appendChild(figcaption);
                     container.appendChild(figure);
