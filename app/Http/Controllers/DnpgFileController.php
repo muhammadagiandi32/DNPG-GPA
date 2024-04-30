@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Http;
 
 class DnpgFileController extends Controller
 {
@@ -96,6 +97,13 @@ class DnpgFileController extends Controller
             // Commit transaksi jika semua operasi berhasil
             DB::commit();
 
+            // Send HTTP To whatsapp API
+            $response = Http::asForm()->post(env('WA_URL'), [
+                'appkey' => env('WA_APPKEY'),
+                'authkey' => env('WA_AUTHKEY'),
+                'to' => env('WA_TO'),
+                'message' => $request->dnpgno . ' Files uploaded successfully'
+            ]);
             // Respon ke frontend
             return response()->json(['message' => 'Files uploaded successfully'], 201);
         } catch (\Exception $e) {

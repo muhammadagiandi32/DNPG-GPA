@@ -174,7 +174,8 @@
             // Menampilkan overlay
             document.getElementById("loading-overlay").classList.remove("d-none");
             // Menonaktifkan semua elemen interaktif
-            document.querySelectorAll('button, input, select, textarea').forEach(function(element) {
+            document.querySelectorAll('.fileinput-button, button, input, select, textarea').forEach(function(
+                element) {
                 element.setAttribute('disabled', 'disabled');
             });
             const dnpgno = document.getElementsByClassName("dnpgno")[0].value;
@@ -197,7 +198,8 @@
             // Menyembunyikan overlay
             document.getElementById("loading-overlay").classList.add("d-none");
             // Mengaktifkan kembali semua elemen interaktif
-            document.querySelectorAll('button, input, select, textarea').forEach(function(element) {
+            document.querySelectorAll('.fileinput-button, button, input, select, textarea').forEach(function(
+                element) {
                 element.removeAttribute('disabled');
             });
             document.querySelector("#total-progress").style.opacity = "0"
