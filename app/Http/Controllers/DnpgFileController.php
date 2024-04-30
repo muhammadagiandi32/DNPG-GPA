@@ -47,7 +47,7 @@ class DnpgFileController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'files.*' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048', // Menerima multiple files
+            'files.*' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:16048', // Menerima multiple files
             'dnpgno' => 'required',
             // 'keterangan.*' => 'required', // Validasi keterangan untuk setiap file
         ]);

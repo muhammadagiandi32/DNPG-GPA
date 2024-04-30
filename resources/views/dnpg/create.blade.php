@@ -46,6 +46,11 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 d-flex align-items-center">
+                                        <div id="loading-overlay"
+                                            class="spinner-border text-secondary justify-content-center align-items-center"
+                                            role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
                                         <div class="fileupload-process w-100">
                                             <div id="total-progress" class="progress progress-striped active"
                                                 role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -128,6 +133,10 @@
 @section('js')
     <script src="{{ asset('assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
     <script>
+        window.onload = function() {
+            document.getElementById("loading-overlay").classList.add("d-none");
+        };
+
         Dropzone.autoDiscover = false
         document.querySelector("#actions .deleteAll").style.display = 'none';
         var previewNode = document.querySelector("#template")
@@ -162,6 +171,12 @@
             document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
         })
         myDropzone.on("sendingmultiple", function(file, xhr, formData) {
+            // Menampilkan overlay
+            document.getElementById("loading-overlay").classList.remove("d-none");
+            // Menonaktifkan semua elemen interaktif
+            document.querySelectorAll('button, input, select, textarea').forEach(function(element) {
+                element.setAttribute('disabled', 'disabled');
+            });
             const dnpgno = document.getElementsByClassName("dnpgno")[0].value;
 
             formData.append("dnpgno", dnpgno); // Menambahkan DNPGNO ke formData
@@ -179,6 +194,12 @@
 
         })
         myDropzone.on("queuecomplete", function(progress) {
+            // Menyembunyikan overlay
+            document.getElementById("loading-overlay").classList.add("d-none");
+            // Mengaktifkan kembali semua elemen interaktif
+            document.querySelectorAll('button, input, select, textarea').forEach(function(element) {
+                element.removeAttribute('disabled');
+            });
             document.querySelector("#total-progress").style.opacity = "0"
         })
         document.querySelector("#actions .start").onclick = function() {
